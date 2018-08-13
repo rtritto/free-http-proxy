@@ -1,0 +1,24 @@
+{
+  "name": "free-http-proxy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/postor/free-http-proxy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/postor/free-http-proxy/issues"
+  },
+  "homepage": "https://github.com/postor/free-http-proxy#readme",
+  "dependencies": {
+    "jsdom": "^11.12.0",
+    "request-promise": "^4.2.2"
+  }
+}
