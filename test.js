@@ -1,9 +1,9 @@
 const P = require('./index')
 
-const t = new P(false);
+const t = new P();
 
 (async ()=>{
-  await t.loadPage(require('fs').readFileSync('test-html.txt',{encoding:'utf-8'}))
+  await t.loadPage()
   console.log(await t.getProxy())
   console.log(await t.getProxy(true))
   console.log(await t.getProxy(true))
