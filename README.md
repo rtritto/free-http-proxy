@@ -11,6 +11,7 @@ const t = new P();
 
 (async ()=>{
   console.log(await t.getProxys(1)) // note: page starts from 1
+  //  console.log(await t.getProxys(2) // for page 2
 })()
 
 /*
