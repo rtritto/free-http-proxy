@@ -1,6 +1,6 @@
 # free-http-proxy
 
-by default, proxy come from https://www.us-proxy.org/
+by default, proxy come from https://www.free-proxy-list.com
 
 # usage
 
@@ -8,73 +8,53 @@ by default, proxy come from https://www.us-proxy.org/
 const P = require('free-http-proxy')
 
 const t = new P();
-//const t = new P('https://free-proxy-list.net/uk-proxy.html');
 
 (async ()=>{
-  await t.loadPage()
-  console.log(await t.getProxy())
-  console.log(await t.getProxy(true)) //force update
-  console.log(await t.getProxy(true)) //force update
-  console.log(await t.getProxy(true)) //force update
-  console.log(await t.getProxy())
-  console.log(await t.getProxy())
+  console.log(await t.getProxys(1)) // note: page starts from 1
 })()
 
 /*
-{ ip: '45.76.0.232',
-  port: '8118',
-  code: 'US',
-  country: 'United States',
-  anonymity: 'elite proxy',
-  google: 'no',
-  isHttps: true,
-  lastChecked: '0 seconds ago',
-  url: 'https://45.76.0.232:8118' }
-{ ip: '138.68.59.192',
-  port: '8080',
-  code: 'US',
-  country: 'United States',
-  anonymity: 'anonymous',
-  google: 'no',
-  isHttps: false,
-  lastChecked: '1 minute ago',
-  url: 'http://138.68.59.192:8080' }
-{ ip: '50.115.106.98',
-  port: '3128',
-  code: 'US',
-  country: 'United States',
-  anonymity: 'anonymous',
-  google: 'no',
-  isHttps: false,
-  lastChecked: '1 minute ago',
-  url: 'http://50.115.106.98:3128' }
-{ ip: '207.246.112.24',
-  port: '80',
-  code: 'US',
-  country: 'United States',
-  anonymity: 'anonymous',
-  google: 'no',
-  isHttps: false,
-  lastChecked: '1 minute ago',
-  url: 'http://207.246.112.24:80' }
-{ ip: '207.246.112.24',
-  port: '80',
-  code: 'US',
-  country: 'United States',
-  anonymity: 'anonymous',
-  google: 'no',
-  isHttps: false,
-  lastChecked: '1 minute ago',
-  url: 'http://207.246.112.24:80' }
-{ ip: '207.246.112.24',
-  port: '80',
-  code: 'US',
-  country: 'United States',
-  anonymity: 'anonymous',
-  google: 'no',
-  isHttps: false,
-  lastChecked: '1 minute ago',
-  url: 'http://207.246.112.24:80' }
+[
+  {
+    ip: '110.139.19.149',
+    port: '8080',
+    country: 'Indonesia',
+    city: 'Tangerang',
+    speed: '111',
+    latency: '0.2997s',
+    uptime: '23.08',
+    type: 'http',
+    anonymity: 'High Anonymous',
+    updated: '2 hours 28 mins',
+    url: 'http://110.139.19.149:8080'
+  },
+  {
+    ip: '119.235.27.118',
+    port: '8080',
+    country: 'Indonesia',
+    city: 'Bogor',
+    speed: '172',
+    latency: '1.3107s',
+    uptime: '15.00',
+    type: 'https',
+    anonymity: 'High Anonymous',
+    updated: '2 hours 28 mins',
+    url: 'https://119.235.27.118:8080'
+  },
+  {
+    ip: '125.167.51.33',
+    port: '8080',
+    country: 'Indonesia',
+    city: 'Kediri',
+    speed: '205',
+    latency: '0.2691s',
+    uptime: '38.46',
+    type: 'https',
+    anonymity: 'High Anonymous',
+    updated: '4 hours 28 mins',
+    url: 'https://125.167.51.33:8080'
+  }
+]
 */
 
 ```
