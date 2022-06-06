@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/postor/free-http-proxy#readme",
   "dependencies": {
-    "jsdom": "^11.12.0",
-    "request-promise": "^4.2.2"
+    "axios": "^0.27.2",
+    "jsdom": "^11.12.0"
   }
 }
