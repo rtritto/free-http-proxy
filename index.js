@@ -1,5 +1,5 @@
 const axios = require('axios')
-const JSDOM = require("jsdom").JSDOM
+const { parse } = require('node-html-parser')
 
 class ProxySource {
   constructor(url = 'https://www.free-proxy-list.com') {
@@ -11,22 +11,39 @@ class ProxySource {
       params: { page },
       responseType: 'text'
     }).then(res => res.data)
-    let jsdom = new JSDOM(html)
-    let { document } = jsdom.window
-    let nodes = document.querySelectorAll('.proxy-list tbody tr')
-    return [...nodes].map(x => tr2proxy(x))
+
+    const root = parse(html, {
+      blockTextElements: {
+        script: false,
+        style: false
+      },
+      comment: false
+    })
+
+    const trsRaw = root.querySelectorAll('.proxy-list tbody tr')
+    const trs = trsRaw.map(tr => tr.querySelectorAll('td'))
+
+    return trs.map(tr2proxy)
   }
 }
 
 function tr2proxy(tr) {
-  const [
-    _0, _1, _2,
-    ip, _3, _4, _5, port, _6, country, _7, city, _8, speed, _9,
-    latency, _10, uptime, _11, type, _12, anonymity, _13, updated] =
-    [...tr.childNodes].map(x => x.textContent.trim())
+  const ip = tr[0].text
+  const port = tr[2].text
+  const type = tr[8].text
+
   return {
-    ip, port, country, city, speed, latency, uptime, type, anonymity, updated,
-    url: type === 'https' ? `https://${ip}:${port}` : `http://${ip}:${port}`,
+    ip,
+    port: parseInt(port, 10),
+    country: tr[3].text.trim(),
+    city: tr[4].text,
+    speed: tr[5].text.trim(),
+    latency: tr[6].text.trim(),
+    uptime: tr[7].text.trim(),
+    type,
+    anonymity: tr[9].text,
+    updated: tr[10].text,
+    ...(type === 'http' || type === 'https') && { url: `${type}://${ip}:${port}` }
   }
 }
 
