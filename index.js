@@ -1,13 +1,16 @@
-const request = require('request-promise')
+const axios = require('axios')
 const JSDOM = require("jsdom").JSDOM
 
 class ProxySource {
-  constructor(url = 'https://www.free-proxy-list.com/') {
+  constructor(url = 'https://www.free-proxy-list.com') {
     this.url = url
   }
 
   async getProxys(page) {
-    let html = await request(this.url, { qs: { page } })
+    const html = await axios.get(this.url, {
+      params: { page },
+      responseType: 'text'
+    }).then(res => res.data)
     let jsdom = new JSDOM(html)
     let { document } = jsdom.window
     let nodes = document.querySelectorAll('.proxy-list tbody tr')
