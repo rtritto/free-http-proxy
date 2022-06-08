@@ -6,9 +6,33 @@ class ProxySource {
     this.url = url
   }
 
-  async getProxys(page) {
+  /**
+   * 
+   * @param {{
+   *   page?: number
+   *   country?: string
+   *   port?: number From 0 to 65535
+   *   type?: 'http'|'https'|'socks4/5'
+   *   level?: 'none'|'anonymous'|'high-anonymous'
+   *   speed?: 1|2|3
+   *   connect_time?: 1|2|3
+   *   up_time?: number From 0 to 100
+   * }} query 
+   * @returns 
+   */
+  async getProxys({ page, country, port, type, level, speed, connect_time, up_time }) {
     const html = await axios.get(this.url, {
-      params: { page },
+      params: {
+        ...page && { page },
+        ...country && { 'country[]': country },
+        ...port && { port },
+        ...type && { 'type[]': type },
+        ...level && { 'level[]': level },
+        ...speed && { 'speed[]': speed },
+        ...connect_time && { 'connect_time[]': connect_time },
+        ...up_time && { up_time },
+        ...port || type || up_time && { search: 'Search' }
+      },
       responseType: 'text'
     }).then(res => res.data)
     let jsdom = new JSDOM(html)
