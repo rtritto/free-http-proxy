@@ -4,14 +4,29 @@ by default, proxy come from https://www.free-proxy-list.com
 
 # usage
 
+
 ```
 const P = require('free-http-proxy')
 
 const t = new P();
 
 (async ()=>{
-  console.log(await t.getProxys(1)) // note: page starts from 1
-  //  console.log(await t.getProxys(2) // for page 2
+  console.log(await t.getProxys({ page: 1 })) // note: page starts from 1
+  //  console.log(await t.getProxys({ page: 2 }) // for page 2
+  /**
+   * t.getProxys now support more query params, thanks to rtritto https://github.com/rtritto
+   * @param {{
+   *   page?: number
+   *   country?: string
+   *   port?: number From 0 to 65535
+   *   type?: 'http'|'https'|'socks4/5'
+   *   level?: 'none'|'anonymous'|'high-anonymous'
+   *   speed?: 1|2|3
+   *   connect_time?: 1|2|3
+   *   up_time?: number From 0 to 100
+   * }} query 
+   * 
+   */
 })()
 
 /*
